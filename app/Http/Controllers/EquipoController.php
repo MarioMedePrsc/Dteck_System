@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipo;
+use App\Models\EquipoTipo;
+use App\Models\EquipoMarca;
 use App\Http\Requests\EquipoRequest;
+use Illuminate\Http\Request;
 
 /**
  * Class EquipoController
@@ -25,10 +28,14 @@ class EquipoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $equipo = new Equipo();
-        return view('equipo.create', compact('equipo'));
+        $equipo    = new Equipo();
+        $clienteId = $request->get('id_cliente');
+        $ventaId   = $request->input('venta_id'); 
+        $tipos     = EquipoTipo::pluck('descripcion','id');
+        $marcas    = EquipoMarca::pluck('descripcion','id');
+        return view('equipo.create', compact('equipo','clienteId','ventaId','tipos','marcas'));
     }
 
     /**
@@ -37,9 +44,12 @@ class EquipoController extends Controller
     public function store(EquipoRequest $request)
     {
         Equipo::create($request->validated());
-
-        return redirect()->route('equipos.index')
+        return redirect()->route('venta-detalles.create', [
+            'venta_id' => $request->input('venta_id')
+        ])->with('success', 'Equipo creado correctamente.');
+        /*return redirect()->route('equipos.index')
             ->with('success', 'Equipo created successfully.');
+            */
     }
 
     /**

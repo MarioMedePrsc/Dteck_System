@@ -83,6 +83,9 @@
                                     <a class="dropdown-item" href="{{ route('ventas.index') }}">
                                         {{ __('Ventas') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('venta-detalles.index') }}">
+                                        {{ __('Ventas Detalle') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('venta-estatuses.index') }}">
                                         {{ __('Estatus de Ventas') }}
                                     </a>
