@@ -41,6 +41,11 @@
             <input type="text" name="id_estatus" class="form-control @error('id_estatus') is-invalid @enderror" value="{{ old('id_estatus', $venta?->id_estatus) }}" id="id_estatus" placeholder="Id Estatus">
             {!! $errors->first('id_estatus', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+        <div class="form-group mb-2 mb20">
+            <label for="total_unidades" class="form-label">{{ __('Total Unidades') }}</label>
+            <input type="text" name="total_unidades" class="form-control @error('total_unidades') is-invalid @enderror" value="{{ old('total_unidades', $venta?->total_unidades) }}" id="total_unidades" placeholder="Total Unidades">
+            {!! $errors->first('total_unidades', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
 
     </div>
     <div class="col-md-12 mt20 mt-2">

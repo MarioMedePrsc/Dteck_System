@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id_estatus
  * @property $created_at
  * @property $updated_at
+ * @property $total_unidades
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -33,7 +34,7 @@ class Venta extends Model
      *
      * @var array
      */
-    protected $fillable = ['folio', 'id_cliente', 'id_usuario', 'fecha_creacion', 'subtotal', 'total_iva', 'total', 'id_estatus'];
+    protected $fillable = ['folio', 'id_cliente', 'id_usuario', 'fecha_creacion', 'subtotal', 'total_iva', 'total', 'id_estatus', 'total_unidades'];
 
 
 

@@ -52,6 +52,10 @@
                             <strong>Id Estatus:</strong>
                             {{ $venta->id_estatus }}
                         </div>
+                        <div class="form-group mb-2 mb20">
+                            <strong>Total Unidades:</strong>
+                            {{ $venta->total_unidades }}
+                        </div>
 
                     </div>
                 </div>

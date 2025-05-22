@@ -44,6 +44,7 @@
 										<th>Total Iva</th>
 										<th>Total</th>
 										<th>Id Estatus</th>
+										<th>Total Unidades</th>
 
                                         <th></th>
                                     </tr>
@@ -61,6 +62,7 @@
 											<td>{{ $venta->total_iva }}</td>
 											<td>{{ $venta->total }}</td>
 											<td>{{ $venta->id_estatus }}</td>
+											<td>{{ $venta->total_unidades }}</td>
 
                                             <td>
                                                 <form action="{{ route('ventas.destroy',$venta->id) }}" method="POST">
