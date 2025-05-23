@@ -24,7 +24,7 @@ class VentaDetalleRequest extends FormRequest
         return [
 			'id_venta' => 'required',
 			'id_servicio' => 'required',
-			'cantidad' => 'required',
+			'cantidad' => 'required|integer',
 			'costo_unidad' => 'required',
 			'iva' => 'required',
 			'subtotal' => 'required',

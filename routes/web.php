@@ -33,6 +33,8 @@ Route::get('/', function () {
         return redirect('/login');
     }
 });
+
+Route::get('equipos/create-from-venta', [EquipoController::class, 'createFromVenta'])->name('equipos.createFromVenta');
 //rutas de los resources
 Route::resource('clientes',ClienteController::class);
 Route::resource('articulos', ArticuloController::class);
@@ -46,6 +48,9 @@ Route::resource('servicio-realizados', ServicioRealizadoController::class);
 Route::resource('ventas', VentaController::class);
 Route::resource('venta-detalles', VentaDetalleController::class);
 Route::resource('venta-estatuses', VentaEstatusController::class);
+
+
+//Route::delete('/venta-detalles/destroy/{id}', [VentaDetalleController::class, 'destroy'])->name('venta-detalles.destroy');
 
 Auth::routes();
 

@@ -43,13 +43,27 @@ class EquipoController extends Controller
      */
     public function store(EquipoRequest $request)
     {
-        Equipo::create($request->validated());
-        return redirect()->route('venta-detalles.create', [
-            'venta_id' => $request->input('venta_id')
-        ])->with('success', 'Equipo creado correctamente.');
-        /*return redirect()->route('equipos.index')
-            ->with('success', 'Equipo created successfully.');
-            */
+        $validated = $request->validated();
+        $equipo = new Equipo();
+        $equipo->id_cliente     = $request->input('id_cliente');
+        $equipo->id_tipo        = $request->input('id_tipo');
+        $equipo->id_marca       = $request->input('id_marca');
+        $equipo->modelo         = $request->input('modelo');
+        $equipo->numero_serie   = $request->input('numero_serie');
+        $equipo->descripcion    = $request->input('descripcion');
+
+        $equipo->save();
+
+        if ($request->has('venta_id') && !empty($request->input('venta_id'))) {
+            $idVenta = $request->input('venta_id');
+
+            return redirect()->route('venta-detalles.create', ['venta_id' => $idVenta])
+                ->with('success', 'Equipo creado correctamente ');
+        }
+
+        // Redirección por defecto si no hay venta asociada
+        return redirect()->route('equipos.index')
+            ->with('success', 'Equipo creado correctamente.');
     }
 
     /**
@@ -89,5 +103,14 @@ class EquipoController extends Controller
 
         return redirect()->route('equipos.index')
             ->with('success', 'Equipo deleted successfully');
+    }
+    public function createFromVenta(Request $request)
+    {
+        $equipo    = new Equipo();
+        $clienteId = $request->query('id_cliente');
+        $ventaId   = $request->query('venta_id'); 
+        $tipos     = EquipoTipo::pluck('descripcion','id');
+        $marcas    = EquipoMarca::pluck('descripcion','id');
+        return view('equipo.createFromVenta', compact('equipo','clienteId','ventaId','tipos','marcas'));
     }
 }

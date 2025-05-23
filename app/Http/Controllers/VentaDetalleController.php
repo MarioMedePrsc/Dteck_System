@@ -36,7 +36,7 @@ class VentaDetalleController extends Controller
         $ventaId      = $request->get('venta_id');
         $venta        = Venta::find($ventaId);
         $equipos      = Equipo::where('id_cliente', $venta->id_cliente)
-        ->pluck('descripcion', 'id');
+                        ->pluck('descripcion', 'id');
         $articulos    = Articulo::with('iva:id,tasa_iva')
         ->select('id', 'descripcion', 'id_tipo', 'id_iva', 'costo_unidad')
         ->get();
@@ -48,9 +48,27 @@ class VentaDetalleController extends Controller
      */
     public function store(VentaDetalleRequest $request)
     {
-        VentaDetalle::create($request->validated());
+        $validated = $request->validated();
+
+        $ventaDetalle = new VentaDetalle();
+
+        $ventaDetalle->id_venta     = $request->input('id_venta');
+        $ventaDetalle->id_servicio  = $request->input('id_servicio');
+        $ventaDetalle->cantidad     = $request->input('cantidad');
+        $ventaDetalle->costo_unidad = $request->input('costo_unidad');
+        $ventaDetalle->id_equipo    = $request->input('id_equipo'); // ← aquí se guarda manual
+        $ventaDetalle->tasa_iva     = $request->input('tasa_iva');
+        $ventaDetalle->iva          = $request->input('iva');
+        $ventaDetalle->subtotal     = $request->input('subtotal');
+        $ventaDetalle->total        = $request->input('total');
+        // otros campos si es necesario
+
+        $ventaDetalle->save();
+        
+        Venta::actualizarCabecera($ventaDetalle->id_venta);
+
         return redirect()->route('ventas.edit', [
-            'venta' => $request->input('id_venta')
+            'venta' => $ventaDetalle->id_venta
         ]);
 
         /*
@@ -75,8 +93,14 @@ class VentaDetalleController extends Controller
     public function edit($id)
     {
         $ventaDetalle = VentaDetalle::find($id);
+        $venta        = Venta::find($ventaDetalle->id_venta);
+        $equipos      = Equipo::where('id_cliente', $venta->id_cliente)
+                        ->pluck('descripcion', 'id');
+        $articulos    = Articulo::with('iva:id,tasa_iva')
+                        ->select('id', 'descripcion', 'id_tipo', 'id_iva', 'costo_unidad')
+                        ->get();
 
-        return view('venta-detalle.edit', compact('ventaDetalle'));
+        return view('venta-detalle.edit', compact('ventaDetalle','venta','articulos','equipos'));
     }
 
     /**
@@ -84,17 +108,41 @@ class VentaDetalleController extends Controller
      */
     public function update(VentaDetalleRequest $request, VentaDetalle $ventaDetalle)
     {
-        $ventaDetalle->update($request->validated());
+        $validated = $request->validated();
+        //$ventaDetalle->update($request->validated());
+        $ventaDetalle->id_venta     = $request->input('id_venta');
+        $ventaDetalle->id_servicio  = $request->input('id_servicio');
+        $ventaDetalle->cantidad     = $request->input('cantidad');
+        $ventaDetalle->costo_unidad = $request->input('costo_unidad');
+        $ventaDetalle->id_equipo    = $request->input('id_equipo'); // ← aquí se guarda manual
+        $ventaDetalle->tasa_iva     = $request->input('tasa_iva');
+        $ventaDetalle->iva          = $request->input('iva');
+        $ventaDetalle->subtotal     = $request->input('subtotal');
+        $ventaDetalle->total        = $request->input('total');
+        // otros campos si es necesario
 
+        $ventaDetalle->save();
+        Venta::actualizarCabecera($ventaDetalle->id_venta);
+        return redirect()->route('ventas.edit', [
+            'venta' => $request->input('id_venta')
+        ]);
+        /*
         return redirect()->route('venta-detalles.index')
             ->with('success', 'VentaDetalle updated successfully');
+            */
     }
 
     public function destroy($id)
     {
-        VentaDetalle::find($id)->delete();
+        
+        $ventaDetalle = VentaDetalle::findOrFail($id);
+        $idVenta = $ventaDetalle->id_venta; 
+        $ventaDetalle->delete();
+        
+        Venta::actualizarCabecera($ventaDetalle->id_venta);
 
-        return redirect()->route('venta-detalles.index')
-            ->with('success', 'VentaDetalle deleted successfully');
+        return redirect()->route('ventas.edit', ['venta' => $idVenta])
+                        ->with('success', 'Detalle eliminado correctamente.');
     }
+
 }

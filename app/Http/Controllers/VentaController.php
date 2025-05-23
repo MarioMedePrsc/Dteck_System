@@ -88,14 +88,24 @@ class VentaController extends Controller
      */
     public function update(VentaRequest $request, Venta $venta)
     {
-        $venta->update($request->validated());
+        $validated = $request->validated();
+        $venta->id_estatus = $request->input('id_estatus');
+        $venta->id_cliente = $request->input('id_cliente');
+        $venta->id_usuario = Auth::id();
+        if($request->input('id_estatus') == '2')
+        {
+            $maxFolio = Venta::where('id_estatus', 2)->max('folio') ?? 0;
+            $venta->folio = $maxFolio + 1;
+        }
+        $venta->save();
 
         return redirect()->route('ventas.index')
-            ->with('success', 'Venta updated successfully');
+            ->with('success', 'Venta Actualizada con Éxito');
     }
 
     public function destroy($id)
     {
+        console.log("Elimina Venta");
         Venta::find($id)->delete();
 
         return redirect()->route('ventas.index')

@@ -35,6 +35,22 @@ class VentaDetalle extends Model
      * @var array
      */
     protected $fillable = ['id_venta', 'id_servicio', 'id_equipo', 'cantidad', 'costo_unidad', 'tasa_iva', 'iva', 'subtotal', 'total'];
+    
+    public function articulo()
+    {
+        return $this->belongsTo(Articulo::class, 'id_servicio');
+    }
+
+    public function equipo()
+    {
+        return $this->belongsTo(Equipo::class, 'id_equipo');
+    }
+
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class, 'id_venta');
+    }
+
 
 
 

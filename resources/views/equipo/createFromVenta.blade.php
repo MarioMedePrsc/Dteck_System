@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ __('Create') }} Venta
+    {{ __('Create') }} Equipo
 @endsection
 
 @section('content')
@@ -11,22 +11,22 @@
 
                 <div class="card-black">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                        
                         <div class="float-left">
-                            <span class="card-title">{{ __('Nueva') }} Venta</span>
+                            <span class="card-title">{{ __('Agregar') }} Equipo</span>
                         </div>
+                        
                         <div class="float-right">
                             <a class="btn btn-primary btn-sm" 
-                            href="{{ route('ventas.index')}}">
+                            href="{{ isset($ventaId) && !empty($ventaId) ? route('venta-detalles.create', ['venta_id' => $ventaId]) : url()->previous() }}">
                                 {{ __('Back') }}
                             </a>
                         </div>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('ventas.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('equipos.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('venta.form')
+                            @include('equipo.formFromVenta')
 
                         </form>
                     </div>

@@ -1,13 +1,13 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+// Variables (esto debe ir primero)
+@use 'variables' as *;
 
-// Variables
-@import 'variables';
-
-// Bootstrap
+// Bootstrap (por ahora se puede mantener así)
 @import 'bootstrap/scss/bootstrap';
 
-//clases personalizadas
+// Fonts (se permite dejar este `@import` de URL)
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Clases personalizadas
 .card-black {
     @extend .card;
     border: 0;
@@ -21,4 +21,3 @@
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
     }
 }
-

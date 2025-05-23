@@ -44,5 +44,27 @@ class Venta extends Model
     {
         return $this->hasMany(VentaDetalle::class, 'id_venta');
     }
+    public static function actualizarCabecera(int $idVenta): void
+    {
+        $totales = VentaDetalle::where('id_venta', $idVenta)
+                    ->selectRaw('
+                        SUM(iva) as total_iva, 
+                        SUM(subtotal) as subtotal, 
+                        SUM(total) as total, 
+                        SUM(cantidad) as total_unidades
+                    ')
+                    ->first();
+
+        $venta = self::find($idVenta);
+
+        if ($venta) {
+            $venta->total_iva      = $totales->total_iva ?? 0;
+            $venta->subtotal       = $totales->subtotal ?? 0;
+            $venta->total          = $totales->total ?? 0;
+            $venta->total_unidades = $totales->total_unidades ?? 0;
+            $venta->save();
+        }
+    }
+
 
 }

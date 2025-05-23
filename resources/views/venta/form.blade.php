@@ -1,17 +1,25 @@
 <div class="row padding-1 p-1">
     <div class="col-md-12 mb-2">
-        <button type="submit" class="btn btn-primary">{{ __('Agregar') }}</button>
+        @if (isset($venta) && $venta->id )
+            @if ($venta->id_estatus == 1)
+                <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
+            @endif
+        @else
+            <button type="submit" class="btn btn-primary">{{ __('Agregar') }}</button>
+        @endif
+
+        
+
     </div>
     <div class="col-md-12">
         <div class="row">
+            <input type="hidden" name="venta_id" id="venta_id" value="{{ $venta->id ?? 0 }}">
             <div class="col-md-6 mb-2">
                 <div class="row align-items-center">
                     <label for="id_usuario" class="col-sm-4 col-form-label">{{ __('Usuario') }}</label>
                     <div class="col-sm-8">
                         <input type="hidden" name="id_usuario" value="{{ $venta?->id_usuario }}">
                         <input type="text" class="form-control" value="{{ $usuarios[$venta?->id_usuario] ?? 'Usuario' }}" readonly>
-
-
                         {!! $errors->first('id_usuario', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
                     </div>
                 </div>
@@ -39,20 +47,18 @@
                 <div class="row align-items-center">
                     <label for="id_estatus" class="col-sm-4 col-form-label">{{ __('Estatus') }}</label>
                     <div class="col-sm-8">
-                        
-                        <input type="hidden" name="id_estatus" value="{{ $venta?->id_estatus }}">
-
-                       
-                        <input type="text" 
-                            class="form-control @error('id_estatus') is-invalid @enderror" 
-                            value="{{ $ventaEstatus[$venta?->id_estatus] ?? 'Desconocido' }}" 
-                            readonly>
+                        <select name="id_estatus" id="id_estatus" class="form-control @error('id_estatus') is-invalid @enderror">
+                            @foreach($ventaEstatus as $id => $descripcion)
+                                <option value="{{ $id }}" {{ (old('id_estatus', $venta?->id_estatus) == $id) ? 'selected' : '' }}>
+                                    {{ $descripcion }}
+                                </option>
+                            @endforeach
+                        </select>
                         {!! $errors->first('id_estatus', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-                    
                     </div>
-                    
                 </div>
             </div>
+
             <div class="col-md-6 mb-2">
                 <div class="row align-items-center">
                     <label for="id_cliente" class="col-sm-4 col-form-label">{{ __('Cliente') }}</label>
@@ -76,18 +82,8 @@
             </div>
         </div>
         <hr/>
-        <div class="row">
+        <div class="row" style="display: none;">
             
-            <div class="col-md-8">
-                @include('venta-detalle._lista', ['venta' => $venta])
-                @if (isset($venta) && $venta->id)
-                    <a href="{{ route('venta-detalles.create', ['venta_id' => $venta->id]) }}" class="btn btn-success">
-                        Agregar artículo
-                    </a>
-                @endif
-                
-
-            </div>
             <div class="col-md-4">
                 <div class="form-group mb-2 mb20">
                     <label for="total_unidades" class="form-label">{{ __('Total Unidades') }}</label>
@@ -116,3 +112,43 @@
     </div>
     
 </div>
+
+<script>
+    const inptEstatus   = document.getElementById('id_estatus');
+    const inptIdVenta   = document.getElementById('venta_id');
+    const inptCliente   = document.getElementById('id_cliente');
+  
+    document.addEventListener('DOMContentLoaded', function () {
+        const formVenta = document.getElementById('formVenta');
+        if (formVenta) 
+        {
+            formVenta.addEventListener('submit', function (event) 
+            {
+                if ((inptIdVenta && inptIdVenta.value != 0) && inptEstatus.value != '1') 
+                {
+                    const confirmed = confirm('¿Deseas cambiar el estatus de la Venta?, si lo haces ya no se podrá modificar el registro');
+                    if (!confirmed) 
+                    {
+                        event.preventDefault(); 
+                    }
+                }
+            });
+        }
+
+        if((inptIdVenta && inptIdVenta.value != 0) && inptEstatus.value != '1')
+        {
+            inptEstatus.style.pointerEvents = 'none';
+            inptEstatus.style.backgroundColor = '#e9ecef'; 
+    
+            inptCliente.style.pointerEvents = 'none';
+            inptCliente.style.backgroundColor = '#e9ecef'; 
+           
+        }
+        if(inptIdVenta && inptIdVenta.value == 0)
+        {
+            inptEstatus.style.pointerEvents = 'none';
+            inptEstatus.style.backgroundColor = '#e9ecef'; 
+        }
+    });
+
+</script>
