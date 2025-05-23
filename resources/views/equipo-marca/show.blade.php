@@ -11,7 +11,7 @@
                 <div class="card-black">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Mostrar') }} Equipo Marca</span>
+                            <span class="card-title">{{ __('Mostrar') }} marca de equipo</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary btn-sm" href="{{ route('equipo-marcas.index') }}"> {{ __('Regresar') }}</a>

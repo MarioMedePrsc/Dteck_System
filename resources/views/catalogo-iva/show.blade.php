@@ -11,7 +11,7 @@
                 <div class="card-black">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Mostrar') }} Catalogo Iva</span>
+                            <span class="card-title">{{ __('Mostrar') }} IVA</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary btn-sm" href="{{ route('catalogo-ivas.index') }}"> {{ __('Regresar') }}</a>

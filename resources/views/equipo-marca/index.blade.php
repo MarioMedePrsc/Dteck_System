@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Equipo Marca') }}
+                                {{ __('Lista de marcas de equipo') }}
                             </span>
 
                              <div class="float-right">

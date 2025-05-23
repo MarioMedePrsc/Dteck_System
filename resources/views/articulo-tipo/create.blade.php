@@ -11,7 +11,7 @@
 
                 <div class="card card-black">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Crear') }} Articulo Tipo</span>
+                        <span class="card-title">{{ __('Crear') }} tipo de articulo</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('articulo-tipos.store') }}"  role="form" enctype="multipart/form-data">

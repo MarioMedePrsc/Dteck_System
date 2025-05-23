@@ -11,7 +11,7 @@
 
                 <div class="card card-black">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Actualizar') }} Equipo Tipo</span>
+                        <span class="card-title">{{ __('Actualizar') }} tipos de equipo</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('equipo-tipos.update', $equipoTipo->id) }}"  role="form" enctype="multipart/form-data">
