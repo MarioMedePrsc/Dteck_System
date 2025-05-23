@@ -10,7 +10,7 @@
                 <div class="card-black">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title"><?php echo e(__('Mostrar')); ?> Articulo Tipo</span>
+                            <span class="card-title"><?php echo e(__('Mostrar')); ?> tipo de articulo</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary btn-sm" href="<?php echo e(route('articulo-tipos.index')); ?>"> <?php echo e(__('Regresar')); ?></a>

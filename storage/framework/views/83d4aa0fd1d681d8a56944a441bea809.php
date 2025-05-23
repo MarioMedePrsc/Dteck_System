@@ -9,7 +9,7 @@
 
                 <div class="card card-black">
                     <div class="card-header">
-                        <span class="card-title"><?php echo e(__('Actualizar')); ?> Articulo Tipo</span>
+                        <span class="card-title"><?php echo e(__('Actualizar')); ?> tipo de articulo</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="<?php echo e(route('articulo-tipos.update', $articuloTipo->id)); ?>"  role="form" enctype="multipart/form-data">

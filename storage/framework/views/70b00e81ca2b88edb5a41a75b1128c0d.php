@@ -11,7 +11,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                <?php echo e(__('Equipo Marca')); ?>
+                                <?php echo e(__('Lista de marcas de equipo')); ?>
 
                             </span>
 
