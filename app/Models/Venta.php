@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\VentaDetalle;
 
 /**
  * Class Venta
@@ -20,10 +18,7 @@ use App\Models\VentaDetalle;
  * @property $id_estatus
  * @property $created_at
  * @property $updated_at
- * @property $total_unidades
  *
- * @property VentaDetalle[] $detalles
- * 
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -38,11 +33,8 @@ class Venta extends Model
      *
      * @var array
      */
-    protected $fillable = ['folio', 'id_cliente', 'id_usuario', 'fecha_creacion', 'subtotal', 'total_iva', 'total', 'id_estatus', 'total_unidades'];
+    protected $fillable = ['folio', 'id_cliente', 'id_usuario', 'fecha_creacion', 'subtotal', 'total_iva', 'total', 'id_estatus'];
 
-    public function detalles(): HasMany
-    {
-        return $this->hasMany(VentaDetalle::class, 'id_venta');
-    }
+
 
 }

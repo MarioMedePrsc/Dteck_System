@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CatalogoIva;
 
 /**
  * Class Articulo
@@ -31,12 +30,6 @@ class Articulo extends Model
      * @var array
      */
     protected $fillable = ['descripcion', 'id_tipo', 'id_iva', 'costo_unidad'];
-
-    public function iva()
-    {
-        return $this->belongsTo(CatalogoIva::class, 'id_iva');
-    }
-
 
 
 

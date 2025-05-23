@@ -24,8 +24,8 @@ class EquipoRequest extends FormRequest
         return [
 			'id_cliente' => 'required',
 			'id_tipo' => 'required',
-			//'modelo' => 'string',
-			//'numero_serie' => 'string',
+			'modelo' => 'string',
+			'numero_serie' => 'string',
 			'descripcion' => 'required|string',
         ];
     }
