@@ -39,7 +39,7 @@ class EquipoMarcaController extends Controller
         EquipoMarca::create($request->validated());
 
         return redirect()->route('equipo-marcas.index')
-            ->with('success', 'EquipoMarca created successfully.');
+            ->with('success', 'Marca de equipo creada exitosamente.');
     }
 
     /**
@@ -70,7 +70,7 @@ class EquipoMarcaController extends Controller
         $equipoMarca->update($request->validated());
 
         return redirect()->route('equipo-marcas.index')
-            ->with('success', 'EquipoMarca updated successfully');
+            ->with('success', 'Marca de equipo actualizada exitosamente');
     }
 
     public function destroy($id)
@@ -78,6 +78,6 @@ class EquipoMarcaController extends Controller
         EquipoMarca::find($id)->delete();
 
         return redirect()->route('equipo-marcas.index')
-            ->with('success', 'EquipoMarca deleted successfully');
+            ->with('success', 'Marca de equipo eliminada exitosamente');
     }
 }

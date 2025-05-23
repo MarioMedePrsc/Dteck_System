@@ -39,7 +39,7 @@ class CatalogoIvaController extends Controller
         CatalogoIva::create($request->validated());
 
         return redirect()->route('catalogo-ivas.index')
-            ->with('success', 'CatalogoIva created successfully.');
+            ->with('success', 'IVA creado exitosamente.');
     }
 
     /**
@@ -70,7 +70,7 @@ class CatalogoIvaController extends Controller
         $catalogoIva->update($request->validated());
 
         return redirect()->route('catalogo-ivas.index')
-            ->with('success', 'CatalogoIva updated successfully');
+            ->with('success', 'IVA actualizado exitosamente');
     }
 
     public function destroy($id)
@@ -78,6 +78,6 @@ class CatalogoIvaController extends Controller
         CatalogoIva::find($id)->delete();
 
         return redirect()->route('catalogo-ivas.index')
-            ->with('success', 'CatalogoIva deleted successfully');
+            ->with('success', 'IVA eliminado exitosamente');
     }
 }

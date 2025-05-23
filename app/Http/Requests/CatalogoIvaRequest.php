@@ -22,7 +22,7 @@ class CatalogoIvaRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'tasa_iva' => 'required',
+			'tasa_iva' => 'required|integer|min:0|max:100',
         ];
     }
 }

@@ -39,7 +39,7 @@ class EquipoTipoController extends Controller
         EquipoTipo::create($request->validated());
 
         return redirect()->route('equipo-tipos.index')
-            ->with('success', 'EquipoTipo created successfully.');
+            ->with('success', 'Tipo de equipo creado exitosamente.');
     }
 
     /**
@@ -70,7 +70,7 @@ class EquipoTipoController extends Controller
         $equipoTipo->update($request->validated());
 
         return redirect()->route('equipo-tipos.index')
-            ->with('success', 'EquipoTipo updated successfully');
+            ->with('success', 'Tipo de equipo actualizado exitosamente');
     }
 
     public function destroy($id)
@@ -78,6 +78,6 @@ class EquipoTipoController extends Controller
         EquipoTipo::find($id)->delete();
 
         return redirect()->route('equipo-tipos.index')
-            ->with('success', 'EquipoTipo deleted successfully');
+            ->with('success', 'Tipo de equipo eliminado exitosamente');
     }
 }

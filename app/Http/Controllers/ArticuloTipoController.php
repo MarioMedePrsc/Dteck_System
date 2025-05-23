@@ -39,7 +39,7 @@ class ArticuloTipoController extends Controller
         ArticuloTipo::create($request->validated());
 
         return redirect()->route('articulo-tipos.index')
-            ->with('success', 'ArticuloTipo created successfully.');
+            ->with('success', 'Tipo de articulo creado exitosamente.');
     }
 
     /**
@@ -70,7 +70,7 @@ class ArticuloTipoController extends Controller
         $articuloTipo->update($request->validated());
 
         return redirect()->route('articulo-tipos.index')
-            ->with('success', 'ArticuloTipo updated successfully');
+            ->with('success', 'Tipo de articulo editado exitosamente');
     }
 
     public function destroy($id)
@@ -78,6 +78,6 @@ class ArticuloTipoController extends Controller
         ArticuloTipo::find($id)->delete();
 
         return redirect()->route('articulo-tipos.index')
-            ->with('success', 'ArticuloTipo deleted successfully');
+            ->with('success', 'Tipo de articulo eliminado exitosamente');
     }
 }
