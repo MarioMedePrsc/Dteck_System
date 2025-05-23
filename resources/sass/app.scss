@@ -6,8 +6,7 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
-//clases personalizadas
+// clases personalizadas
 .card-black {
     @extend .card;
     border: 0;
@@ -16,9 +15,8 @@
     .card-header {
         background-color: #2c2c2c;
         color: #fff;
-        font-size: 1rem; 
+        font-size: 1rem;
         font-weight: bold;
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
     }
 }
-

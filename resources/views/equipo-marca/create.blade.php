@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="card card-default">
+                <div class="card card-black">
                     <div class="card-header">
                         <span class="card-title">{{ __('Create') }} Equipo Marca</span>
                     </div>

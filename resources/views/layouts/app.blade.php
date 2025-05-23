@@ -61,12 +61,12 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="opcionServicios" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Gestión de Servicios
+                                    Servicios
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="opcionServicios">
                                     <a class="dropdown-item" href="{{ route('servicio-realizados.index') }}">
-                                        {{ __('Servicios Registrados') }}
+                                        {{ __('Servicios') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('servicio-estatuses.index') }}">
                                         {{ __('Estatus de Servicios') }}
@@ -80,13 +80,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="opcionVentas">
-                                    <a class="dropdown-item" href="{{ route('ventas.index') }}">
+                                    <a class="dropdown-item" href="{{ route('servicio-realizados.index') }}">
                                         {{ __('Ventas') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('venta-detalles.index') }}">
-                                        {{ __('Ventas Detalle') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('venta-estatuses.index') }}">
+                                    <a class="dropdown-item" href="{{ route('servicio-estatuses.index') }}">
                                         {{ __('Estatus de Ventas') }}
                                     </a>
                                     

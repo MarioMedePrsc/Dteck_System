@@ -8,17 +8,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card-black">
+                <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Lista de Ventas') }}
+                                {{ __('Venta') }}
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('ventas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('+ Nuevo') }}
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -44,7 +44,6 @@
 										<th>Total Iva</th>
 										<th>Total</th>
 										<th>Id Estatus</th>
-										<th>Total Unidades</th>
 
                                         <th></th>
                                     </tr>
@@ -62,7 +61,6 @@
 											<td>{{ $venta->total_iva }}</td>
 											<td>{{ $venta->total }}</td>
 											<td>{{ $venta->id_estatus }}</td>
-											<td>{{ $venta->total_unidades }}</td>
 
                                             <td>
                                                 <form action="{{ route('ventas.destroy',$venta->id) }}" method="POST">

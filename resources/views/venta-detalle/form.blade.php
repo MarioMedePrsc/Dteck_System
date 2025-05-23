@@ -2,48 +2,20 @@
     <div class="col-md-12">
         
         <div class="form-group mb-2 mb20">
-            <label for="id_venta" class="form-label">{{ __('Venta') }}</label>
-            <input type="text" name="id_venta" class="form-control @error('id_venta') is-invalid @enderror" value="{{ old('id_venta', $venta->id) }}" id="id_venta" placeholder="Venta">
+            <label for="id_venta" class="form-label">{{ __('Id Venta') }}</label>
+            <input type="text" name="id_venta" class="form-control @error('id_venta') is-invalid @enderror" value="{{ old('id_venta', $ventaDetalle?->id_venta) }}" id="id_venta" placeholder="Id Venta">
             {!! $errors->first('id_venta', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
-        {{-- Select de Artículo --}}
         <div class="form-group mb-2 mb20">
-            <label for="id_servicio" class="form-label">{{ __('Artículo') }}</label>
-            <select name="id_servicio" id="id_servicio" class="form-control @error('id_servicio') is-invalid @enderror">
-                <option value="">Seleccione un artículo</option>
-                @foreach ($articulos as $articulo)
-                    <option 
-                        value="{{ $articulo->id }}"
-                        data-costo="{{ $articulo->costo_unidad }}"
-                        data-iva="{{ $articulo->iva->tasa_iva ?? 0 }}"
-                        data-tipo="{{ $articulo->id_tipo }}"
-                        {{ old('id_servicio', $ventaDetalle?->id_servicio) == $articulo->id ? 'selected' : '' }}
-                    >
-                        {{ $articulo->descripcion }}
-                    </option>
-                @endforeach
-            </select>
+            <label for="id_servicio" class="form-label">{{ __('Id Servicio') }}</label>
+            <input type="text" name="id_servicio" class="form-control @error('id_servicio') is-invalid @enderror" value="{{ old('id_servicio', $ventaDetalle?->id_servicio) }}" id="id_servicio" placeholder="Id Servicio">
             {!! $errors->first('id_servicio', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-            
-
         </div>
         <div class="form-group mb-2 mb20">
-            <label for="id_equipo" class="form-label">{{ __('Equipo') }}</label>
-            <select name="id_equipo" id="id_equipo" class="form-control @error('id_equipo') is-invalid @enderror">
-                <option value="">-- Selecciona un equipo --</option>
-                @foreach ($equipos as $id => $descripcion)
-                    <option value="{{ $id }}" {{ old('id_equipo', $ventaDetalle?->id_equipo) == $id ? 'selected' : '' }}>
-                        {{ $descripcion }}
-                    </option>
-                @endforeach
-            </select>
+            <label for="id_equipo" class="form-label">{{ __('Id Equipo') }}</label>
+            <input type="text" name="id_equipo" class="form-control @error('id_equipo') is-invalid @enderror" value="{{ old('id_equipo', $ventaDetalle?->id_equipo) }}" id="id_equipo" placeholder="Id Equipo">
             {!! $errors->first('id_equipo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-            <a href="{{ route('equipos.create', ['id_cliente' => $venta->id_cliente, 'venta_id' => $venta->id]) }}" class="btn btn-primary mb-2">
-                Agregar equipo
-            </a>
-
         </div>
-
         <div class="form-group mb-2 mb20">
             <label for="cantidad" class="form-label">{{ __('Cantidad') }}</label>
             <input type="text" name="cantidad" class="form-control @error('cantidad') is-invalid @enderror" value="{{ old('cantidad', $ventaDetalle?->cantidad) }}" id="cantidad" placeholder="Cantidad">
@@ -80,36 +52,3 @@
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
-<script>
-    const idServicio  = document.getElementById('id_servicio');
-    const inputCosto  = document.getElementById('costo_unidad');
-    const inputIva    = document.getElementById('tasa_iva');
-    const inputEquipo = document.getElementById('id_equipo');
-
-    function actualizarCampos() {
-        const selected = idServicio.options[idServicio.selectedIndex];
-        const costo    = selected.getAttribute('data-costo') || '';
-        const iva      = selected.getAttribute('data-iva') || '';
-        const tipo     = selected.getAttribute('data-tipo') || '';
-
-        inputCosto.value = costo;
-        inputIva.value = iva;
-
-        
-        if (tipo === '2') 
-        {
-            inputEquipo.removeAttribute('disabled');
-        } else 
-        {
-            inputEquipo.setAttribute('disabled', 'disabled');
-            inputEquipo.value = ''; 
-        }
-    }
-
-    // Evento de cambio
-    idServicio.addEventListener('change', actualizarCampos);
-
-    // Llamarlo una vez al cargar si ya hay seleccionado
-    window.addEventListener('DOMContentLoaded', actualizarCampos);
-</script>
-
