@@ -59,8 +59,8 @@
 											
 											<td>{{ $venta->cliente->nombre ?? 'N/D'}}</td>
 											<td>{{ $venta->usuario->name ?? 'N/D'}}</td>
-											<td>${{ $venta->total_iva ?? 'N/D'}}</td>
-											<td>{{ number_format($venta->subtotal, 2) }}</td>
+											<td>{{ $venta->total_iva ?? 'N/D'}}</td>
+											<td>${{ number_format($venta->subtotal, 2) }}</td>
 											
                                             <td>${{ number_format($venta->total, 2) }}</td>
 
