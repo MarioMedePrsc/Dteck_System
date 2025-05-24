@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Http\Requests\ArticuloRequest;
-
+use App\Models\CatalogoIva;
+use App\Models\ArticuloTipo;
 /**
  * Class ArticuloController
  * @package App\Http\Controllers
@@ -16,9 +17,10 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::paginate();
+        $articulos = Articulo::with('tipo', 'iva')->paginate();
 
-        return view('articulo.index', compact('articulos'))
+
+          return view('articulo.index', compact('articulos'))
             ->with('i', (request()->input('page', 1) - 1) * $articulos->perPage());
     }
 
@@ -28,7 +30,9 @@ class ArticuloController extends Controller
     public function create()
     {
         $articulo = new Articulo();
-        return view('articulo.create', compact('articulo'));
+        $ivas     = CatalogoIva::all(); 
+        $tipos    = ArticuloTipo::pluck('descripcion', 'id');
+        return view('articulo.create', compact('articulo', 'ivas','tipos'));
     }
 
     /**
@@ -58,8 +62,10 @@ class ArticuloController extends Controller
     public function edit($id)
     {
         $articulo = Articulo::find($id);
+        $ivas     = CatalogoIva::all();
+        $tipos    = ArticuloTipo::pluck('descripcion', 'id');
 
-        return view('articulo.edit', compact('articulo'));
+        return view('articulo.edit', compact('articulo', 'ivas','tipos'));
     }
 
     /**

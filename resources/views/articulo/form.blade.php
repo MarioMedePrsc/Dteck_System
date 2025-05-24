@@ -7,13 +7,27 @@
             {!! $errors->first('descripcion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
-            <label for="id_tipo" class="form-label">{{ __('Id Tipo') }}</label>
-            <input type="text" name="id_tipo" class="form-control @error('id_tipo') is-invalid @enderror" value="{{ old('id_tipo', $articulo?->id_tipo) }}" id="id_tipo" placeholder="Id Tipo">
+            <label for="id_tipo" class="form-label">{{ __('Tipo de Articulo') }}</label>
+            <select name="id_tipo" id="id_tipo" class="form-control @error('id_tipo') is-invalid @enderror">
+                <option value="">Seleccione una opción</option>
+                @foreach ($tipos as $id => $descripcion)
+                    <option value="{{ $id }}" {{ old('id_tipo', $articulo?->id_tipo) == $id ? 'selected' : '' }}>
+                        {{ $descripcion }}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('id_tipo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
-            <label for="id_iva" class="form-label">{{ __('Id Iva') }}</label>
-            <input type="text" name="id_iva" class="form-control @error('id_iva') is-invalid @enderror" value="{{ old('id_iva', $articulo?->id_iva) }}" id="id_iva" placeholder="Id Iva">
+            <label for="id_iva" class="form-label">{{ __('IVA') }}</label>
+            <select name="id_iva" id="id_iva" class="form-control @error('id_iva') is-invalid @enderror">
+                @foreach($ivas as $iva)
+                <option value="{{ $iva->id }}" {{ old('id_iva', $articulo?->id_iva) == $iva->id ? 'selected' : '' }}>
+                   ({{ $iva->tasa_iva }}%)
+                </option>
+                @endforeach
+            </select>
             {!! $errors->first('id_iva', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">

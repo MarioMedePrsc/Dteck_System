@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ArticuloTipo extends Model
 {
-    
+    protected $table = 'articulo_tipos'; // <- Agregado
 
     protected $perPage = 20;
 
