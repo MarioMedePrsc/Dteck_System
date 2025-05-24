@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\VentaDetalle;
+use App\Models\Cliente;
+use App\Models\User;
+use App\Models\VentaEstatus;
 
 /**
  * Class Venta
@@ -44,6 +47,7 @@ class Venta extends Model
     {
         return $this->hasMany(VentaDetalle::class, 'id_venta');
     }
+
     public static function actualizarCabecera(int $idVenta): void
     {
         $totales = VentaDetalle::where('id_venta', $idVenta)
@@ -64,6 +68,20 @@ class Venta extends Model
             $venta->total_unidades = $totales->total_unidades ?? 0;
             $venta->save();
         }
+    }
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function estatus()
+    {
+        return $this->belongsTo(VentaEstatus::class, 'id_estatus');
     }
 
 

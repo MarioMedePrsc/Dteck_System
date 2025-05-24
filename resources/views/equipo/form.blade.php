@@ -1,8 +1,8 @@
 <div class="row padding-1 p-1">
     <div class="col-md-12">
-        <input type="hidden" name="venta_id" value="{{ $ventaId }}">
+     
 
-        <div class="form-group mb-2 mb20">
+        <div class="form-group mb-2 mb20" style="display:none;">
             <label for="id_cliente" class="form-label">{{ __('Cliente') }}</label>
             <input type="text" name="id_cliente" class="form-control @error('id_cliente') is-invalid @enderror" value="{{ old('id_cliente', $clienteId) }}" id="id_cliente" readonly>
             {!! $errors->first('id_cliente', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
@@ -52,6 +52,6 @@
 
     </div>
     <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Aceptar') }}</button>
     </div>
 </div>

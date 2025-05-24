@@ -32,10 +32,10 @@ class EquipoController extends Controller
     {
         $equipo    = new Equipo();
         $clienteId = $request->get('id_cliente');
-        $ventaId   = $request->input('venta_id'); 
+        //$ventaId   = $request->input('venta_id'); 
         $tipos     = EquipoTipo::pluck('descripcion','id');
         $marcas    = EquipoMarca::pluck('descripcion','id');
-        return view('equipo.create', compact('equipo','clienteId','ventaId','tipos','marcas'));
+        return view('equipo.create', compact('equipo','clienteId','tipos','marcas'));
     }
 
     /**
