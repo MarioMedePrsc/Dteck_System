@@ -22,27 +22,27 @@
                         
                         <div class="form-group mb-2 mb20">
                             <strong>Id Cliente:</strong>
-                            {{ $equipo->id_cliente }}
+                            {{ $equipo->id_cliente ?? '' }}
                         </div>
                         <div class="form-group mb-2 mb20">
                             <strong>Id Tipo:</strong>
-                            {{ $equipo->id_tipo }}
+                            {{ $equipo->id_tipo ?? ''}}
                         </div>
                         <div class="form-group mb-2 mb20">
                             <strong>Id Marca:</strong>
-                            {{ $equipo->id_marca }}
+                            {{ $equipo->id_marca ?? ''}}
                         </div>
                         <div class="form-group mb-2 mb20">
                             <strong>Modelo:</strong>
-                            {{ $equipo->modelo }}
+                            {{ $equipo->modelo ?? '' }}
                         </div>
                         <div class="form-group mb-2 mb20">
                             <strong>Numero Serie:</strong>
-                            {{ $equipo->numero_serie }}
+                            {{ $equipo->numero_serie ?? ''}}
                         </div>
                         <div class="form-group mb-2 mb20">
                             <strong>Descripcion:</strong>
-                            {{ $equipo->descripcion }}
+                            {{ $equipo->descripcion ?? ''}}
                         </div>
 
                     </div>

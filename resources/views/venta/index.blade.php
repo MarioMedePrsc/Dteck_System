@@ -35,15 +35,20 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Folio</th>
-										<th>Id Cliente</th>
-										<th>Id Usuario</th>
-										<th>Fecha Creacion</th>
+                                        <th>Fecha Creacion</th>
+										
+										<th>Cliente</th>
+										<th>Usuario</th>
+										<th>IVA</th>
 										<th>Subtotal</th>
-										<th>Total Iva</th>
+										
 										<th>Total</th>
-										<th>Id Estatus</th>
+
+										
+										<th>Total Unidades</th>
+                                        <th>Folio</th>
+                                        <th>Estatus</th>
+
 
                                         <th></th>
                                     </tr>
@@ -52,15 +57,21 @@
                                     @foreach ($ventas as $venta)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $venta->folio }}</td>
-											<td>{{ $venta->id_cliente }}</td>
-											<td>{{ $venta->id_usuario }}</td>
-											<td>{{ $venta->fecha_creacion }}</td>
-											<td>{{ $venta->subtotal }}</td>
-											<td>{{ $venta->total_iva }}</td>
-											<td>{{ $venta->total }}</td>
-											<td>{{ $venta->id_estatus }}</td>
+
+                                            <td>{{ $venta->fecha_creacion }}</td>
+											
+											<td>{{ $venta->cliente->nombre ?? 'N/D'}}</td>
+											<td>{{ $venta->usuario->name ?? 'N/D'}}</td>
+											<td>${{ $venta->total_iva ?? 'N/D'}}</td>
+											<td>{{ number_format($venta->subtotal, 2) }}</td>
+											
+                                            <td>${{ number_format($venta->total, 2) }}</td>
+
+											
+											<td>{{ $venta->total_unidades }}</td>
+                                            <td>{{ $venta->folio }}</td>
+                                            <td>{{ $venta->estatus->descripcion ?? 'N/D'}}</td>
+
 
                                             <td>
                                                 <form action="{{ route('ventas.destroy',$venta->id) }}" method="POST">

@@ -14,7 +14,9 @@
                             <span class="card-title">{{ __('Show') }} Venta Detalle</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('venta-detalles.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary btn-sm" href="{{ url()->previous() }}">
+                                {{ __('Back') }}
+                            </a>
                         </div>
                     </div>
 

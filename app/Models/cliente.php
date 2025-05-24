@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Equipo;
 
 /**
  * Class Cliente
@@ -29,6 +31,10 @@ class Cliente extends Model
      * @var array
      */
     protected $fillable = ['nombre', 'telefono', 'correo_electronico'];
+    public function equipos(): HasMany
+    {
+        return $this->hasMany(Equipo::class, 'id_cliente');
+    }
 
 
 
