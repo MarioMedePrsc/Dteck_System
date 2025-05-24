@@ -8,17 +8,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card-black">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Servicio Realizado') }}
+                                {{ __('Lista de Servicios Realizados') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('servicio-realizados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                <a style="display: none;" href="{{ route('servicio-realizados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('+ Nuevo') }}
                                 </a>
                               </div>
                         </div>
@@ -35,12 +35,13 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Id Venta Detalle</th>
-										<th>Id Estatus</th>
+                                        <th>Cliente</th>
+										<th>Equipo</th>
+                                        <th>Artículo</th>
+										<th>Estatus</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin</th>
-										<th>Notas</th>
+										
 
                                         <th></th>
                                     </tr>
@@ -49,20 +50,20 @@
                                     @foreach ($servicioRealizados as $servicioRealizado)
                                         <tr>
                                             <td>{{ ++$i }}</td>
+                                            <td>{{ $servicioRealizado->ventaDetalle?->venta?->cliente?->nombre ?? 'Sin cliente' }}</td>
+											<td>{{ $servicioRealizado->ventaDetalle?->equipo?->descripcion ?? 'Sin equipo' }}</td>
+                                            <td>{{ $servicioRealizado->ventaDetalle?->articulo?->descripcion ?? 'Sin artículo' }}</td>
                                             
-											<td>{{ $servicioRealizado->id_venta_detalle }}</td>
-											<td>{{ $servicioRealizado->id_estatus }}</td>
+											<td>{{ $servicioRealizado->estatus?->descripcion ?? 'Sin estatus' }}</td>
 											<td>{{ $servicioRealizado->fecha_inicio }}</td>
 											<td>{{ $servicioRealizado->fecha_fin }}</td>
-											<td>{{ $servicioRealizado->notas }}</td>
+										
 
                                             <td>
                                                 <form action="{{ route('servicio-realizados.destroy',$servicioRealizado->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('servicio-realizados.show',$servicioRealizado->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('servicio-realizados.edit',$servicioRealizado->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('servicio-realizados.edit',$servicioRealizado->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

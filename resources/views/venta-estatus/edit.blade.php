@@ -9,9 +9,9 @@
         <div class="">
             <div class="col-md-12">
 
-                <div class="card card-default">
+                <div class="card-black">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Venta Estatus</span>
+                        <span class="card-title">{{ __('Editar') }} Estatus de Venta</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('venta-estatuses.update', $ventaEstatus->id) }}"  role="form" enctype="multipart/form-data">

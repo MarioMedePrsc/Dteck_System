@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\VentaDetalle;
+use App\Models\ServicioEstatus;
 
 /**
  * Class ServicioRealizado
@@ -22,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
 class ServicioRealizado extends Model
 {
     
-
     protected $perPage = 20;
 
     /**
@@ -31,6 +32,15 @@ class ServicioRealizado extends Model
      * @var array
      */
     protected $fillable = ['id_venta_detalle', 'id_estatus', 'fecha_inicio', 'fecha_fin', 'notas'];
+    public function ventaDetalle()
+    {
+        return $this->belongsTo(VentaDetalle::class, 'id_venta_detalle');
+    }
+    public function estatus()
+{
+    return $this->belongsTo(ServicioEstatus::class, 'id_estatus');
+}
+
 
 
 

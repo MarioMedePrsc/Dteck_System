@@ -18,7 +18,31 @@
                         </div>
                     @endif
 
-                    {{ __('Por el momento no hay ningún servicio pendiente') }}
+                    @if ($serviciosPendientes->isEmpty())
+                        <p class="text-muted">{{ __('Por el momento no hay ningún servicio pendiente') }}</p>
+                    @else
+                        <table class="table table-bordered mt-3">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Servicio</th>
+                                    <th>Equipo</th>
+                                    <th>Fecha Inicio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($serviciosPendientes as $servicio)
+                                    <tr>
+                                        <td>{{ $servicio->ventaDetalle->venta->cliente->nombre ?? '-' }}</td>
+                                        <td>{{ $servicio->ventaDetalle->articulo->descripcion ?? '-' }}</td>
+                                        <td>{{ $servicio->ventaDetalle->equipo->descripcion ?? '-' }}</td>
+                                        <td>{{ $servicio->fecha_inicio }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+
                 </div>
             </div>
         </div>

@@ -12,6 +12,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -83,14 +85,17 @@
                                     <a class="dropdown-item" href="{{ route('ventas.index') }}">
                                         {{ __('Ventas') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('venta-detalles.index') }}">
-                                        {{ __('Ventas Detalle') }}
-                                    </a>
+                               
                                     <a class="dropdown-item" href="{{ route('venta-estatuses.index') }}">
                                         {{ __('Estatus de Ventas') }}
                                     </a>
                                     
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                        {{ __('Usuarios') }}
+                                </a>
                             </li>
 
                         </ul>

@@ -12,6 +12,7 @@ use App\Http\Controllers\ServicioRealizadoController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\VentaDetalleController;
 use App\Http\Controllers\VentaEstatusController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,7 @@ Route::resource('servicio-realizados', ServicioRealizadoController::class);
 Route::resource('ventas', VentaController::class);
 Route::resource('venta-detalles', VentaDetalleController::class);
 Route::resource('venta-estatuses', VentaEstatusController::class);
+Route::resource('users', UserController::class);
 
 
 //Route::delete('/venta-detalles/destroy/{id}', [VentaDetalleController::class, 'destroy'])->name('venta-detalles.destroy');

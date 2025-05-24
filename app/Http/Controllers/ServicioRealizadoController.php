@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ServicioRealizado;
 use App\Http\Requests\ServicioRealizadoRequest;
+use App\Models\ServicioEstatus;
 
 /**
  * Class ServicioRealizadoController
@@ -16,7 +17,13 @@ class ServicioRealizadoController extends Controller
      */
     public function index()
     {
-        $servicioRealizados = ServicioRealizado::paginate();
+        //$servicioRealizados = ServicioRealizado::paginate();
+        $servicioRealizados = ServicioRealizado::with([
+            'ventaDetalle.equipo',
+            'ventaDetalle.articulo',
+            'ventaDetalle.venta.cliente',
+            'estatus'  
+        ])->paginate();
 
         return view('servicio-realizado.index', compact('servicioRealizados'))
             ->with('i', (request()->input('page', 1) - 1) * $servicioRealizados->perPage());
@@ -57,9 +64,14 @@ class ServicioRealizadoController extends Controller
      */
     public function edit($id)
     {
-        $servicioRealizado = ServicioRealizado::find($id);
-
-        return view('servicio-realizado.edit', compact('servicioRealizado'));
+        //$servicioRealizado = ServicioRealizado::find($id);
+        $estatus           = ServicioEstatus::pluck('descripcion', 'id');
+        $servicioRealizado = ServicioRealizado::with([
+            'ventaDetalle.articulo',
+            'ventaDetalle.equipo',
+            'ventaDetalle.venta.cliente'
+        ])->findOrFail($id);
+        return view('servicio-realizado.edit', compact('servicioRealizado','estatus'));
     }
 
     /**
@@ -67,7 +79,15 @@ class ServicioRealizadoController extends Controller
      */
     public function update(ServicioRealizadoRequest $request, ServicioRealizado $servicioRealizado)
     {
-        $servicioRealizado->update($request->validated());
+        $validated = $request->validated();
+        //$servicioRealizado->update($request->validated());
+        $servicioRealizado->id_estatus = $request->input('id_estatus');
+        $servicioRealizado->notas      = $request->input('notas');
+        if($request->input('id_estatus') != '1')
+        {
+            $servicioRealizado->fecha_fin = now();
+        }
+        $servicioRealizado->save();
 
         return redirect()->route('servicio-realizados.index')
             ->with('success', 'ServicioRealizado updated successfully');

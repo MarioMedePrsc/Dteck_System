@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ServicioRealizado;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $serviciosPendientes = ServicioRealizado::with([
+            'ventaDetalle.articulo',     // Servicio
+            'ventaDetalle.equipo',       // Equipo
+            'ventaDetalle.venta.cliente' // Cliente
+        ])->where('id_estatus', 1)->get();
+
+        return view('home', compact('serviciosPendientes'));
     }
 }

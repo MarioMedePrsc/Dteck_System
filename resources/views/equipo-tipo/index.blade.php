@@ -50,11 +50,10 @@
 
                                             <td>
                                                 <form action="{{ route('equipo-tipos.destroy',$equipoTipo->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('equipo-tipos.show',$equipoTipo->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('equipo-tipos.edit',$equipoTipo->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('equipo-tipos.edit',$equipoTipo->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
                                                 </form>
                                             </td>
                                         </tr>
