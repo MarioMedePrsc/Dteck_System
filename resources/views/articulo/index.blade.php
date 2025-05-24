@@ -50,8 +50,8 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $articulo->descripcion }}</td>
-											<td>{{ $articulo->id_tipo }}</td>
-											<td>{{ $articulo->id_iva }}</td>
+											<td>{{ $articulo->tipo?->descripcion }}</td>
+											<td>{{ $articulo->iva?->nombre }}</td>
 											<td>{{ $articulo->costo_unidad }}</td>
 
                                             <td>

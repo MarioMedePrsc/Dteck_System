@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Http\Requests\ArticuloRequest;
+use App\Models\Iva;
 
 /**
  * Class ArticuloController
@@ -16,9 +17,10 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::paginate();
+        $articulos = Articulo::with('tipo', 'iva')->paginate();
 
-        return view('articulo.index', compact('articulos'))
+
+          return view('articulo.index', compact('articulos'))
             ->with('i', (request()->input('page', 1) - 1) * $articulos->perPage());
     }
 
@@ -28,7 +30,8 @@ class ArticuloController extends Controller
     public function create()
     {
         $articulo = new Articulo();
-        return view('articulo.create', compact('articulo'));
+        $ivas = Iva::all(); // Obtener todos los IVAs
+        return view('articulo.create', compact('articulo', 'ivas'));
     }
 
     /**
@@ -58,8 +61,9 @@ class ArticuloController extends Controller
     public function edit($id)
     {
         $articulo = Articulo::find($id);
+          $ivas = Iva::all();
 
-        return view('articulo.edit', compact('articulo'));
+        return view('articulo.edit', compact('articulo', 'ivas'));
     }
 
     /**

@@ -37,6 +37,11 @@ class Articulo extends Model
         return $this->belongsTo(CatalogoIva::class, 'id_iva');
     }
 
+    public function tipo()
+{
+    return $this->belongsTo(ArticuloTipo::class, 'id_tipo');
+}
+
 
 
 
