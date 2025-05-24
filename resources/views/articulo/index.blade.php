@@ -37,8 +37,8 @@
                                         <th>No</th>
                                         
 										<th>Descripcion</th>
-										<th>Id Tipo</th>
-										<th>Id Iva</th>
+										<th>Tipo</th>
+										<th>Tasa IVA</th>
 										<th>Costo Unidad</th>
 
                                         <th></th>
@@ -51,7 +51,7 @@
                                             
 											<td>{{ $articulo->descripcion }}</td>
 											<td>{{ $articulo->tipo?->descripcion }}</td>
-											<td>{{ $articulo->iva?->nombre }}</td>
+											<td>{{ $articulo->iva?->tasa_iva }}</td>
 											<td>{{ $articulo->costo_unidad }}</td>
 
                                             <td>

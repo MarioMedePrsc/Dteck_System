@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Http\Requests\ArticuloRequest;
-use App\Models\Iva;
-
+use App\Models\CatalogoIva;
+use App\Models\ArticuloTipo;
 /**
  * Class ArticuloController
  * @package App\Http\Controllers
@@ -30,8 +30,9 @@ class ArticuloController extends Controller
     public function create()
     {
         $articulo = new Articulo();
-        $ivas = Iva::all(); // Obtener todos los IVAs
-        return view('articulo.create', compact('articulo', 'ivas'));
+        $ivas     = CatalogoIva::all(); 
+        $tipos    = ArticuloTipo::pluck('descripcion', 'id');
+        return view('articulo.create', compact('articulo', 'ivas','tipos'));
     }
 
     /**
@@ -61,9 +62,10 @@ class ArticuloController extends Controller
     public function edit($id)
     {
         $articulo = Articulo::find($id);
-          $ivas = Iva::all();
+        $ivas     = CatalogoIva::all();
+        $tipos    = ArticuloTipo::pluck('descripcion', 'id');
 
-        return view('articulo.edit', compact('articulo', 'ivas'));
+        return view('articulo.edit', compact('articulo', 'ivas','tipos'));
     }
 
     /**
